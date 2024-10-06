@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Mina:wght@400;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: 'Mina', sans-serif;
+}
+
+.mina-regular {
+  font-weight: 400;
+}
+
+.mina-bold {
+  font-weight: 700;
+}

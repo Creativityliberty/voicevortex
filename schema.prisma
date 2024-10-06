@@ -1,0 +1,30 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["fullTextSearch"]
+  binaryTargets   = ["native"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Project {
+  label       String       @id
+  productions Production[] @relation("productionsToProject")
+}
+
+model Product {
+  name        String       @id
+  description String?
+  productions Production[] @relation("productionsToProduct")
+}
+
+model Production {
+  projectLabel String
+  project      Project @relation("productionsToProject", fields: [projectLabel], references: [label], onDelete: Cascade)
+  productName  String
+  product      Product @relation("productionsToProduct", fields: [productName], references: [name], onDelete: Cascade)
+
+  @@id([projectLabel, productName])
+}
